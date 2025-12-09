@@ -1,10 +1,12 @@
 package org.example.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.example.dto.LoginRequest;
 import org.example.dto.RegisterRequest;
 import org.example.entity.Player;
+import org.example.security.GlobalExceptionHandler;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class AuthService {
       return playerService.createPlayer(new Player(balance,username,password));
     }
 
-
+    @Transactional
     public Player login(LoginRequest request){
         String username = request.getUsername();
         Player player = playerService.getPlayerByUsername(username);

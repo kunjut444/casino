@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { betService } from '../services/api';
 import { BetType, BetRequest } from '../types';
@@ -10,10 +11,29 @@ import './Dashboard.css';
 
 const Dashboard: React.FC = () => {
   const { player, logout, updateBalance } = useAuth();
+  const navigate = useNavigate();
   const [selectedBetType, setSelectedBetType] = useState<BetType>(BetType.EVEN_ODD);
   const [betHistory, setBetHistory] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [lastBetResult, setLastBetResult] = useState<any>(null);
+
+  useEffect(() => {
+    if (player) {
+      loadRecentBets();
+    }
+  }, [player]);
+
+  const loadRecentBets = async () => {
+    if (!player) return;
+    try {
+      const history = await betService.getBetHistory(player.id);
+      // Показываем только последние 5 ставок на дашборде
+      setBetHistory(history.slice(0, 5));
+    } catch (error) {
+      // Игнорируем ошибки при загрузке истории на дашборде
+      console.error('Failed to load bet history:', error);
+    }
+  };
 
   if (!player) {
     return null;
@@ -39,8 +59,8 @@ const Dashboard: React.FC = () => {
         updateBalance(player.balance - result.amount);
       }
 
-      // Добавляем ставку в историю
-      setBetHistory([result, ...betHistory]);
+      // Обновляем историю ставок
+      await loadRecentBets();
     } catch (error: any) {
       alert(error.response?.data?.message || 'Ошибка при размещении ставки');
     } finally {
@@ -72,9 +92,17 @@ const Dashboard: React.FC = () => {
               <span className="balance-amount">${player.balance.toFixed(2)}</span>
             </div>
             <div className="username">👤 {player.username}</div>
-            <button onClick={logout} className="logout-button">
-              Выйти
-            </button>
+            <div className="nav-buttons">
+              <button onClick={() => navigate('/bets')} className="nav-button">
+                История ставок
+              </button>
+              <button onClick={() => navigate('/transactions')} className="nav-button">
+                История транзакций
+              </button>
+              <button onClick={logout} className="logout-button">
+                Выйти
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -124,6 +152,14 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="history-section">
+          <div className="history-section-header">
+            <h2>История ставок</h2>
+            <div className="history-actions">
+              <button className="nav-button" onClick={() => navigate('/transactions')}>
+                История транзакций
+              </button>
+            </div>
+          </div>
           <BetHistory bets={betHistory} />
         </div>
       </div>
@@ -132,4 +168,6 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+
 

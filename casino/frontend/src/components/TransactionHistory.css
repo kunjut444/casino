@@ -1,0 +1,231 @@
+.transaction-history {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  color: white;
+  min-height: 400px;
+}
+
+.transaction-history h2 {
+  margin: 0 0 20px 0;
+  font-size: 24px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.transaction-filters {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-group label {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.filter-group select,
+.filter-group input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.15);
+  color: white;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.search-button,
+.reset-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.search-button {
+  background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+  color: white;
+}
+
+.reset-button {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.search-button:disabled,
+.reset-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.search-button:hover:not(:disabled),
+.reset-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.transaction-item {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.transaction-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-item.completed {
+  border-left: 4px solid #4caf50;
+}
+
+.transaction-item.pending {
+  border-left: 4px solid #ff9800;
+}
+
+.transaction-item.failed {
+  border-left: 4px solid #f44336;
+}
+
+.transaction-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.transaction-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.transaction-icon {
+  font-size: 24px;
+}
+
+.transaction-type-label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.transaction-status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.transaction-status.completed {
+  background: rgba(76, 175, 80, 0.3);
+  color: #c8e6c9;
+}
+
+.transaction-status.pending {
+  background: rgba(255, 152, 0, 0.3);
+  color: #ffe0b2;
+}
+
+.transaction-status.failed {
+  background: rgba(244, 67, 54, 0.3);
+  color: #ffcdd2;
+}
+
+.transaction-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.transaction-amount {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.amount.positive {
+  color: #4caf50;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.amount.negative {
+  color: #f44336;
+  text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+}
+
+.transaction-date {
+  font-size: 14px;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.empty-history,
+.loading,
+.error {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.error {
+  color: #ffcdd2;
+}
+
+/* Scrollbar styling */
+.transaction-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transaction-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.transaction-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+

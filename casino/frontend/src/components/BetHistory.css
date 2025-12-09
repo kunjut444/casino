@@ -105,3 +105,13 @@
   font-size: 18px;
 }
 
+.bet-date {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+}
+
+.empty-history.error {
+  color: #f44336;
+}
+

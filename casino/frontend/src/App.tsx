@@ -4,6 +4,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import BetHistoryPage from './components/BetHistoryPage';
+import TransactionHistoryPage from './components/TransactionHistoryPage';
 import './App.css';
 
 const PrivateRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -44,6 +46,22 @@ const AppContent: React.FC = () => {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/bets"
+          element={
+            <PrivateRoute>
+              <BetHistoryPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/transactions"
+          element={
+            <PrivateRoute>
+              <TransactionHistoryPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/" element={<Navigate to="/dashboard" />} />
       </Routes>
     </Router>
@@ -59,4 +77,6 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+
 

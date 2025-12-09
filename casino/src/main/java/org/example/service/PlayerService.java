@@ -1,6 +1,7 @@
 package org.example.service;
 
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.example.entity.Player;
 import org.example.repository.PlayerRepository;
@@ -29,6 +30,8 @@ public class PlayerService {
       return playerRepository.findByUsername(username);
   }
 
+
+  @Transactional
   public Player createPlayer(Player player){
       if(player == null){
           throw new RuntimeException("игрок не должен быть пустым");
@@ -42,11 +45,11 @@ public class PlayerService {
       return playerRepository.save(player);
 
   }
-
+    @Transactional
   public void deletePlayer(Long id){
       playerRepository.delete(getPlayerById(id));
   }
-
+    @Transactional
   public Player updatePlayer(Long id, Player player){
       Player updatePlayer = getPlayerById(id);
 

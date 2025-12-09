@@ -117,3 +117,6 @@ const EvenOddBet: React.FC<EvenOddBetProps> = ({ onBet, loading, playerBalance }
 
 export default EvenOddBet;
 
+
+
+

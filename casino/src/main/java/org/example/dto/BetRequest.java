@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.entity.Bet;
 import org.example.entity.BetType;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,5 +22,7 @@ public class BetRequest {
     private Double amount;
 
     private String choose;
+
+    private LocalDateTime timestamp;
 }
 
